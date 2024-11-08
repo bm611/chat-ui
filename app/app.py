@@ -8,7 +8,7 @@ def index() -> rx.Component:
     return rx.box(
         nav.nav_section(),
         hero.hero_section(),
-        class_name="w-full mt-2",
+        class_name="w-full mt-4",
     )
 
 

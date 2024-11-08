@@ -27,8 +27,57 @@ def hero_section():
                     ),
                     class_name="w-full max-w-[1000px] relative flex items-center",
                 ),
+                rx.hstack(
+                    rx.box(
+                        rx.hstack(
+                            rx.icon("calendar", color="blue"),
+                            rx.text("Make a plan"),
+                            align="center",
+                            justify="center",
+                        ),
+                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-lg",
+                    ),
+                    rx.box(
+                        rx.hstack(
+                            rx.icon("lightbulb", color="gold"),
+                            rx.text("Brainstorm"),
+                            align="center",
+                            justify="center",
+                        ),
+                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-lg",
+                    ),
+                    rx.box(
+                        rx.hstack(
+                            rx.icon("circle-help", color="green"),
+                            rx.text("Get Advice"),
+                            align="center",
+                            justify="center",
+                        ),
+                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-lg",
+                    ),
+                    rx.box(
+                        rx.hstack(
+                            rx.icon("pencil", color="red"),
+                            rx.text("Help Me Write"),
+                            align="center",
+                            justify="center",
+                        ),
+                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-lg",
+                    ),
+                    rx.box(
+                        rx.hstack(
+                            rx.icon("file-text", color="purple"),
+                            rx.text("Summarize Text"),
+                            align="center",
+                            justify="center",
+                        ),
+                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-lg",
+                    ),
+                    spacing="4",
+                    padding_y="4",
+                ),
                 spacing="6",
-                padding_top="12em",
+                padding_top="20em",
                 width="100%",
                 align="center",  # Centers the content horizontally
             ),
@@ -42,7 +91,7 @@ def hero_section():
             #     class_name="mx-10",
             # ),
             width="100%",
-            height="100vh",  # Makes the container full height
-            spacing="8",
+            height="100vh",
+            spacing="4",
         ),
     )
