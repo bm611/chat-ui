@@ -17,7 +17,7 @@ class State(rx.State):
     def gen_response(self):
         self.is_gen = True
         res = api.get_chat_response(self.query)
-        print(res)
         if res:
             self.response = res
+        self.query = ""
         # self.is_gen = False

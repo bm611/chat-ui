@@ -1,18 +1,14 @@
 import reflex as rx
 from .components import hero
+from .components import nav
 
 
 @rx.page(route="/", title="Chat")
 def index() -> rx.Component:
-    return rx.container(
-        rx.color_mode.button(position="top-right"),
-        rx.vstack(
-            hero.hero_section(),
-            justify="center",
-            align="center",
-            min_height="40vh",
-        ),
-        size="4",
+    return rx.box(
+        nav.nav_section(),
+        hero.hero_section(),
+        class_name="w-full mt-2",
     )
 
 

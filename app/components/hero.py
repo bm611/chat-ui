@@ -5,44 +5,44 @@ from app.state import State
 def hero_section():
     return (
         rx.vstack(
-            rx.text(
-                "SwiftFlare",
-                class_name="text-6xl font-regular tracking-tight bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent drop-shadow-lg mx-10",
-            ),
-            rx.text(
-                "Let's find answers",
-                class_name="text-3xl font-regular text-slate-500 drop-shadow-sm mx-10",
-            ),
-            rx.hstack(
-                rx.input(
-                    placeholder="Enter your prompt...",
-                    class_name="w-full h-20 md:h-24 px-4 md:px-8 pr-8 md:pr-16 rounded-full text-slate-600 text-xl md:text-2xl bg-transparent",
-                    value=State.query,
-                    on_change=State.set_query,
+            # Center section with prompt text and input
+            rx.vstack(
+                rx.text(
+                    "Let's find answers",
+                    class_name="text-4xl font-regular drop-shadow-sm text-center",
                 ),
-                rx.button(
-                    rx.icon("send-horizontal"),
-                    class_name="rounded-full bg-gray-600 hover:bg-black absolute right-8 top-1/2 transform -translate-y-1/2",
-                    size="4",
-                    type="submit",
-                    on_click=State.gen_response,
+                rx.hstack(
+                    rx.input(
+                        placeholder="Enter your prompt...",
+                        class_name="w-full h-12 md:h-20 px-8 md:px-10 pr-16 rounded-full text-slate-600 text-2xl md:text-3xl bg-transparent",
+                        value=State.query,
+                        on_change=State.set_query,
+                    ),
+                    rx.button(
+                        rx.icon("send-horizontal"),
+                        class_name="rounded-full bg-gray-600 hover:bg-black absolute right-8 top-1/2 transform -translate-y-1/2",
+                        size="4",
+                        type="submit",
+                        on_click=State.gen_response,
+                    ),
+                    class_name="w-full max-w-[1000px] relative flex items-center",
                 ),
-                class_name="w-full max-w-[800px] relative flex items-center px-4",
+                spacing="6",
+                padding_top="12em",
+                width="100%",
+                align="center",  # Centers the content horizontally
             ),
-            rx.button(
-                rx.text("Clear chat"),
-                class_name="rounded-full bg-gradient-to-r from-red-500 to-red-700 text-white px-4 py-2 hover:from-red-600 hover:to-red-800 mx-10",
-                on_click=State.refresh,
-                size="4",
-            ),
-            rx.box(
-                rx.cond(
-                    State.is_gen,
-                    rx.markdown(State.response, class_name="mx-10 max-w-3xl text-xl"),
-                    rx.text(),
-                ),
-            ),
+            # Response section
+            # rx.box(
+            #     rx.cond(
+            #         State.is_gen,
+            #         rx.markdown(State.response, class_name="max-w-3xl text-xl"),
+            #         rx.text(),
+            #     ),
+            #     class_name="mx-10",
+            # ),
             width="100%",
-            class_name="flex items-left",
+            height="100vh",  # Makes the container full height
+            spacing="8",
         ),
     )
