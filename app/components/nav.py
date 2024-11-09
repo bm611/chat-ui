@@ -20,7 +20,11 @@ def nav_section():
                 "chat/ui",
                 class_name="text-6xl font-extralight",
             ),
-            rx.color_mode.button(),
-            class_name="w-full flex justify-between items-center px-4 mt-4",
+            rx.link(
+                rx.icon("github"),
+                href="https://github.com/bm611/",
+                is_external=True,
+            ),
+            class_name="w-full flex justify-between items-center px-8 mt-4",
         ),
     )
