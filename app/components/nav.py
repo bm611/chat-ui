@@ -1,6 +1,10 @@
 import reflex as rx
 from app.state import State
 
+doto_style = {
+    "font_family": "Doto, sans-serif",
+}
+
 
 def nav_section():
     return (
@@ -13,10 +17,10 @@ def nav_section():
             ),
             # This pushes the title to the center
             rx.text(
-                "SwiftFlare",
-                class_name="text-6xl font-regular tracking-tight bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent drop-shadow-lg",
+                "chat/ui",
+                class_name="text-6xl font-extralight",
             ),
             rx.color_mode.button(),
-            class_name="w-full flex justify-between items-center px-4",
+            class_name="w-full flex justify-between items-center px-4 mt-4",
         ),
     )

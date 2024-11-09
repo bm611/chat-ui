@@ -8,13 +8,13 @@ def hero_section():
             # Center section with prompt text and input
             rx.vstack(
                 rx.text(
-                    "Let's find answers",
+                    "Discover Your Next Breakthrough",
                     class_name="text-4xl font-regular drop-shadow-sm text-center",
                 ),
                 rx.hstack(
                     rx.input(
                         placeholder="Enter your prompt...",
-                        class_name="w-full h-12 md:h-20 px-8 md:px-10 pr-16 rounded-full text-slate-600 text-2xl md:text-3xl bg-transparent",
+                        class_name="w-full h-12 md:h-20 px-8 md:px-10 pr-16 rounded-full text-slate-600 text-xl md:text-2xl bg-transparent",
                         value=State.query,
                         on_change=State.set_query,
                     ),
@@ -24,6 +24,8 @@ def hero_section():
                         size="4",
                         type="submit",
                         on_click=State.gen_response,
+                        loading=State.is_gen,
+                        disabled=State.is_gen,
                     ),
                     class_name="w-full max-w-[1000px] relative flex items-center",
                 ),
@@ -35,7 +37,13 @@ def hero_section():
                             align="center",
                             justify="center",
                         ),
-                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-lg",
+                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-300 text-lg cursor-pointer",
+                        background_color=rx.color_mode_cond(
+                            light="gray.100", dark="gray"
+                        ),
+                        on_click=lambda: State.set_query(
+                            "Help me create a detailed study plan for the next month"
+                        ),
                     ),
                     rx.box(
                         rx.hstack(
@@ -44,7 +52,13 @@ def hero_section():
                             align="center",
                             justify="center",
                         ),
-                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-lg",
+                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-300 text-lg cursor-pointer",
+                        background_color=rx.color_mode_cond(
+                            light="gray.100", dark="gray"
+                        ),
+                        on_click=lambda: State.set_query(
+                            "Let's brainstorm creative marketing ideas for a new coffee shop"
+                        ),
                     ),
                     rx.box(
                         rx.hstack(
@@ -53,7 +67,13 @@ def hero_section():
                             align="center",
                             justify="center",
                         ),
-                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-lg",
+                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-300 text-lg cursor-pointer",
+                        background_color=rx.color_mode_cond(
+                            light="gray.100", dark="gray"
+                        ),
+                        on_click=lambda: State.set_query(
+                            "What should I consider when buying my first home?"
+                        ),
                     ),
                     rx.box(
                         rx.hstack(
@@ -62,7 +82,13 @@ def hero_section():
                             align="center",
                             justify="center",
                         ),
-                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-lg",
+                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-300 text-lg cursor-pointer",
+                        background_color=rx.color_mode_cond(
+                            light="gray.100", dark="gray"
+                        ),
+                        on_click=lambda: State.set_query(
+                            "Help me write a professional email to request a meeting with my manager"
+                        ),
                     ),
                     rx.box(
                         rx.hstack(
@@ -71,7 +97,13 @@ def hero_section():
                             align="center",
                             justify="center",
                         ),
-                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-lg",
+                        class_name="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-300 text-lg cursor-pointer",
+                        background_color=rx.color_mode_cond(
+                            light="gray.100", dark="gray"
+                        ),
+                        on_click=lambda: State.set_query(
+                            "Summarize the main points of this academic paper"
+                        ),
                     ),
                     spacing="4",
                     padding_y="4",

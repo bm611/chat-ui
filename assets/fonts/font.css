@@ -2,3 +2,8 @@
     font-family: Lexend;
     src: url("/fonts/Lexend-VariableFont_wght.ttf") format("truetype");
 }
+
+@font-face {
+    font-family: Doto;
+    src: url("/fonts/doto.ttf") format("truetype");
+}
