@@ -29,10 +29,10 @@ def chat_section():
                     rx.foreach(State.chat_history, chat_message),
                     spacing="4",
                     align_items="stretch",
-                    class_name="w-full mx-auto py-8",
+                    class_name="w-full max-w-[1000px] mx-auto py-8",
                     size=4,
                 ),
-                class_name="px-40 mb-24",  # Added margin bottom to prevent overlap with input
+                class_name="px-40 mb-24 w-full",  # Added margin bottom to prevent overlap with input
                 overflow_y="auto",
                 flex="1",
             ),
