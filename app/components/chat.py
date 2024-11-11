@@ -2,6 +2,24 @@ import reflex as rx
 from app.state import State
 from typing import List, Tuple
 
+component_map = {
+    "h1": lambda text: rx.heading(text, size="5", margin_y="1em"),
+    "h2": lambda text: rx.heading(text, size="3", margin_y="1em"),
+    "h3": lambda text: rx.heading(text, size="1", margin_y="1em"),
+    "p": lambda text: rx.text(text, margin_y="1em"),
+    "code": lambda text: rx.code(text, color="purple"),
+    "codeblock": lambda text, **props: rx.code_block(
+        text,
+        **props,
+        theme=rx.code_block.themes.dark,
+        margin_y="1em",
+        border_radius="16px",
+    ),
+    "a": lambda text, **props: rx.link(
+        text, **props, color="blue", _hover={"color": "red"}
+    ),
+}
+
 
 def chat_message(message_pair: Tuple[str, str]) -> rx.Component:
     return rx.vstack(
@@ -14,6 +32,7 @@ def chat_message(message_pair: Tuple[str, str]) -> rx.Component:
         ),
         rx.markdown(
             message_pair[1],
+            component_map=component_map,
             class_name="self-start max-w-[80%] text-left mb-4 text-lg",
         ),
         width="100%",
