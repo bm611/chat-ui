@@ -7,8 +7,8 @@ from enum import Enum
 class ModelProvider(Enum):
     CEREBRAS = "cerebras"
     OPENAI = "openai"
-    ANTHROPIC = "anthropic"
-    # Add more providers as needed
+    HYPERBOLIC = "hyperbolic"
+    OLLAMA = "ollama"
 
 
 class ModelConfig:
@@ -33,12 +33,22 @@ PROVIDER_CONFIGS: dict[ModelProvider, ModelConfig] = {
     ModelProvider.CEREBRAS: ModelConfig(
         base_url="https://api.cerebras.ai/v1",
         api_key=os.environ.get("CEREBRAS_API_KEY", ""),
-        available_models=["llama3.1-8b"],
+        available_models=["llama3.1-8b", "llama3.1-70b"],
     ),
     ModelProvider.OPENAI: ModelConfig(
         base_url="https://api.openai.com/v1",
         api_key=os.environ.get("OPENAI_API_KEY", ""),
-        available_models=["gpt-3.5-turbo", "gpt-4"],
+        available_models=["gpt-4o-mini", "gpt-4o", "gpt-4"],
+    ),
+    ModelProvider.HYPERBOLIC: ModelConfig(
+        base_url="https://api.hyperbolic.xyz/v1/",
+        api_key=os.environ.get("HYPERBOLIC_API_KEY", ""),
+        available_models=["Qwen/Qwen2.5-Coder-32B-Instruct"],
+    ),
+    ModelProvider.OLLAMA: ModelConfig(
+        base_url="http://localhost:11434/v1",
+        api_key="ollama",  # required but unused
+        available_models=["llama3.1:latest", "llama3.2:1b", "qwen2.5-coder:latest"],
     ),
 }
 

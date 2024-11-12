@@ -17,14 +17,18 @@ def nav_section():
             ),
             # This pushes the title to the center
             rx.text(
-                "chat/ui",
-                class_name="text-6xl font-extralight",
+                "Reflexity",
+                class_name="text-6xl font-bold",
+                style={"font_family": "SourGummy"},
             ),
-            rx.link(
-                rx.icon("github"),
-                href="https://github.com/bm611/",
-                is_external=True,
+            rx.hstack(
+                rx.link(
+                    rx.icon("github"),
+                    href="https://github.com/bm611/",
+                    is_external=True,
+                ),
+                # rx.color_mode.button(position="top-right"),
             ),
-            class_name="w-full flex justify-between items-center px-8 mt-4",
+            class_name="w-full flex justify-between items-center px-8 mt-4 fixed top-0 bg-white z-50",
         ),
     )

@@ -5,18 +5,18 @@ from typing import List, Tuple
 component_map = {
     "h1": lambda text: rx.heading(text, size="5", margin_y="1em"),
     "h2": lambda text: rx.heading(text, size="3", margin_y="1em"),
-    "h3": lambda text: rx.heading(text, size="1", margin_y="1em"),
+    "h3": lambda text: rx.heading(text, size="2", margin_y="1em"),
     "p": lambda text: rx.text(text, margin_y="1em"),
     "code": lambda text: rx.code(text, color="purple"),
     "codeblock": lambda text, **props: rx.code_block(
         text,
         **props,
-        theme=rx.code_block.themes.dark,
+        theme=rx.code_block.themes.material_light,
         margin_y="1em",
         border_radius="16px",
     ),
     "a": lambda text, **props: rx.link(
-        text, **props, color="blue", _hover={"color": "red"}
+        text, **props, color="blue", _hover={"color": "black"}
     ),
 }
 
@@ -51,7 +51,7 @@ def chat_section():
                     class_name="w-full max-w-[1000px] mx-auto py-8",
                     size=4,
                 ),
-                class_name="px-40 mb-24 w-full",  # Added margin bottom to prevent overlap with input
+                class_name="px-40 mt-24 mb-24 w-full",  # Added margin bottom to prevent overlap with input
                 overflow_y="auto",
                 flex="1",
             ),
@@ -69,7 +69,7 @@ def chat_section():
                         class_name="rounded-full bg-gray-600 hover:bg-black absolute right-8 top-1/2 transform -translate-y-1/2",
                         size="4",
                         type="submit",
-                        on_click=State.gen_response,
+                        on_click=[State.handle_generation, State.gen_response],
                         loading=State.is_gen,
                         disabled=State.is_gen,
                     ),

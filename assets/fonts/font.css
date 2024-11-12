@@ -7,3 +7,8 @@
     font-family: Doto;
     src: url("/fonts/doto.ttf") format("truetype");
 }
+
+@font-face {
+    font-family: SourGummy;
+    src: url("/fonts/SourGummy.ttf") format("truetype");
+}
