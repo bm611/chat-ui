@@ -21,7 +21,9 @@ class State(rx.State):
 
     def gen_response(self):
         self.is_gen = True
-        res = api.get_chat_response(self.query, self.chat_history)
+        res = api.get_chat_response(
+            self.query, "cerebras", "llama3.1-8b", self.chat_history
+        )
         if res:
             self.response = res
         self.is_gen = False

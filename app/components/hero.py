@@ -8,7 +8,7 @@ def hero_section():
             # Center section with prompt text and input
             rx.vstack(
                 rx.text(
-                    "Discover Your Next Breakthrough",
+                    "What can I help you with?",
                     class_name="text-4xl font-regular drop-shadow-sm text-center",
                 ),
                 rx.hstack(
