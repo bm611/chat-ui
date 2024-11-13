@@ -1,14 +1,16 @@
 # Reflexity - AI Chat Interface
 
-A modern chat interface built with Reflex that allows you to interact with various AI models through different providers.
+A modern chat interface built with Reflex that allows you to interact with various AI models through different providers or run completely locally using open-source models.
+
+![Chat Interface](./assets/Chat_Image.jpeg)
+
+![Response Interface](./assets/Response_Image.jpeg)
 
 ## Features
 
 - Clean and intuitive chat interface
 - Support for multiple AI providers
 - Model selection capability
-- Markdown rendering support
-- Responsive design
 
 ## Prerequisites
 
@@ -42,7 +44,7 @@ pip install -r requirements.txt
 
 ## Configuration
 
-1. Set the following environment variables[optional] for your API keys:
+1. Set the following environment variables for your API keys:
 ```bash
 # On Unix or MacOS:
 export CEREBRAS_API_KEY="your_cerebras_api_key"
@@ -51,8 +53,18 @@ export OPENAI_API_KEY="your_openai_api_key"
 
 # On Windows:
 set CEREBRAS_API_KEY=your_cerebras_api_key
-set ANTHROPIC_API_KEY=your_anthropic_api_key
+set HYPERBOLIC_API_KEY=your_anthropic_api_key
 set OPENAI_API_KEY=your_openai_api_key
+```
+
+2. Set the required models in `/app/api/api.py' for each of the providers:
+
+```python
+ModelProvider.OLLAMA: ModelConfig(
+    base_url="http://localhost:11434/v1",
+    api_key="ollama",  # required but unused
+    available_models=["llama3.1:latest", "llama3.2:1b", "qwen2.5-coder:latest"],
+),
 ```
 
 
