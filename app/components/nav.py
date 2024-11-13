@@ -24,7 +24,7 @@ def nav_section():
             rx.hstack(
                 rx.link(
                     rx.icon("github"),
-                    href="https://github.com/bm611/",
+                    href="https://github.com/bm611/chat-ui/",
                     is_external=True,
                 ),
                 # rx.color_mode.button(position="top-right"),

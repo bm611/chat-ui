@@ -93,7 +93,7 @@ def hero_section():
                 rx.hstack(
                     rx.input(
                         placeholder="Enter your prompt...",
-                        class_name="w-full h-12 md:h-20 px-8 md:px-10 rounded-full text-slate-600 text-lg md:text-xl bg-transparent",
+                        class_name="w-full h-12 md:h-20 px-8 md:px-10 rounded-full text-slate-600 text-lg md:text-2xl bg-transparent",
                         value=State.query,
                         on_change=State.set_query,
                     ),
@@ -108,9 +108,9 @@ def hero_section():
                     ),
                     class_name="w-full max-w-[1000px] relative flex items-center",
                 ),
-                rx.vstack(
+                rx.hstack(
                     rx.hstack(
-                        rx.text("Select Provider:", class_name="text-lg"),
+                        rx.text("Select Provider:", class_name="text-xl"),
                         rx.select(
                             State.available_providers,
                             placeholder="Select Provider",
@@ -123,7 +123,7 @@ def hero_section():
                     ),
                     # Model selection dropdown
                     rx.hstack(
-                        rx.text("Select Model:", class_name="text-lg"),
+                        rx.text("Select Model:", class_name="text-xl"),
                         rx.select(
                             State.available_models,
                             placeholder="Select Model",
@@ -136,6 +136,7 @@ def hero_section():
                     ),
                     justify="center",
                     align="center",
+                    spacing="6",
                 ),
                 spacing="4",
                 padding_top="20em",
