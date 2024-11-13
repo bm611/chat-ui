@@ -27,7 +27,6 @@ def nav_section():
                     href="https://github.com/bm611/chat-ui/",
                     is_external=True,
                 ),
-                # rx.color_mode.button(position="top-right"),
             ),
             class_name="w-full flex justify-between items-center px-8 mt-4 fixed top-0 bg-white z-50",
         ),

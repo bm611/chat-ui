@@ -143,15 +143,6 @@ def hero_section():
                 width="100%",
                 align="center",  # Centers the content horizontally
             ),
-            # Response section
-            # rx.box(
-            #     rx.cond(
-            #         State.is_gen,
-            #         rx.markdown(State.response, class_name="max-w-3xl text-xl"),
-            #         rx.text(),
-            #     ),
-            #     class_name="mx-10",
-            # ),
             width="100%",
             height="100vh",
             spacing="4",

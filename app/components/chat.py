@@ -3,20 +3,21 @@ from app.state import State
 from typing import List, Tuple
 
 component_map = {
-    "h1": lambda text: rx.heading(text, size="5", margin_y="1em"),
-    "h2": lambda text: rx.heading(text, size="3", margin_y="1em"),
-    "h3": lambda text: rx.heading(text, size="2", margin_y="1em"),
-    "p": lambda text: rx.text(text, margin_y="1em"),
-    "code": lambda text: rx.code(text, color="purple"),
+    # "h1": lambda text: rx.heading(text, size="5", margin_y="1em"),
+    # "h2": lambda text: rx.heading(text, size="3", margin_y="1em"),
+    # "h3": lambda text: rx.heading(text, size="2", margin_y="1em"),
+    # "p": lambda text: rx.text(text, margin_y="1em", font_family="Inter"),
+    # "code": lambda text: rx.code(text, color="purple"),
     "codeblock": lambda text, **props: rx.code_block(
         text,
         **props,
-        theme=rx.code_block.themes.material_light,
+        theme=rx.code_block.themes.atom_dark,
         margin_y="1em",
         border_radius="16px",
+        font_family="Inter",
     ),
     "a": lambda text, **props: rx.link(
-        text, **props, color="blue", _hover={"color": "black"}
+        text, **props, color="blue", _hover={"color": "black"}, font_family="Inter"
     ),
 }
 
