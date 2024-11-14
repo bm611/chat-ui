@@ -15,7 +15,6 @@ def nav_section():
                 class_name="cursor-pointer hover:bg-gray-100 rounded-lg p-2",
                 size=40,
             ),
-            # This pushes the title to the center
             rx.text(
                 "Reflexity",
                 class_name="text-6xl font-bold",

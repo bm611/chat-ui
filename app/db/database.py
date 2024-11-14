@@ -56,6 +56,9 @@ class Database:
                 (conversation_id, role, content),
             )
             conn.commit()
+            print(
+                f"Added message: conversation_id={conversation_id}, role={role}"
+            )  # Debug log
 
     def get_conversations(self) -> List[Tuple[int, str, str]]:
         with sqlite3.connect(self.db_path) as conn:
@@ -75,8 +78,32 @@ class Database:
                 SELECT role, content
                 FROM messages
                 WHERE conversation_id = ?
-                ORDER BY created_at
-            """,
+                ORDER BY created_at ASC
+                """,
                 (conversation_id,),
             )
-            return cursor.fetchall()
+            messages = cursor.fetchall()
+            print(
+                f"Retrieved {len(messages)} messages for conversation {conversation_id}"
+            )  # Debug log
+            return messages
+
+    def update_conversation_title(self, conversation_id: int, title: str):
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "UPDATE conversations SET title = ? WHERE id = ?",
+                (title, conversation_id),
+            )
+            conn.commit()
+
+    def delete_conversation(self, conversation_id: int):
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            # Delete messages first due to foreign key constraint
+            cursor.execute(
+                "DELETE FROM messages WHERE conversation_id = ?", (conversation_id,)
+            )
+            # Then delete the conversation
+            cursor.execute("DELETE FROM conversations WHERE id = ?", (conversation_id,))
+            conn.commit()
