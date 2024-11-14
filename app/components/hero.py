@@ -1,9 +1,11 @@
 import reflex as rx
 from app.state import State
+from .sidebar import sidebar
 
 
 def hero_section():
-    return (
+    return rx.hstack(
+        sidebar(),
         rx.vstack(
             # Center section with prompt text and input
             rx.vstack(
@@ -147,4 +149,6 @@ def hero_section():
             height="100vh",
             spacing="4",
         ),
+        width="100%",
+        height="100vh",
     )

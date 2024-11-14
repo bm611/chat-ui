@@ -4,6 +4,10 @@ from .components import nav
 from .components import chat
 from app.state import State
 from typing import List, Tuple
+from app.db.database import Database
+
+# Initialize database singleton
+Database.get_instance()
 
 
 @rx.page(route="/", title="Chat")

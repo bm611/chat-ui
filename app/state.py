@@ -1,12 +1,16 @@
 import reflex as rx
 from app.api import api
-from typing import List, Tuple
+from app.db.database import Database
+from typing import List, Tuple, Optional
 
 
 class State(rx.State):
     query: str = ""
     response: str = ""
     is_gen: bool = False
+
+    current_conversation_id: Optional[int] = None
+    conversations: List[Tuple[int, str, str]] = []
 
     # New state variables for provider and model selection
     selected_provider: str = "cerebras"  # default provider
@@ -46,16 +50,43 @@ class State(rx.State):
         self.available_models = api.get_available_models("cerebras")
         return rx.redirect("/")
 
+    def on_mount(self):
+        """Load conversations when the app starts"""
+        self.conversations = Database.get_instance().get_conversations()
+
+    def create_new_conversation(self):
+        """Create a new conversation"""
+        title = self.query[:30] + "..." if len(self.query) > 30 else self.query
+        self.current_conversation_id = Database.get_instance().create_conversation(
+            title
+        )
+        self.conversations = Database.get_instance().get_conversations()
+
+    def load_conversation(self, conversation_id: int):
+        """Load a specific conversation"""
+        self.current_conversation_id = conversation_id
+        messages = Database.get_instance().get_conversation_messages(conversation_id)
+        self.chat_history = [(msg[0], msg[1]) for msg in messages if msg[0] == "user"]
+        return rx.redirect("/chat")
+
     def gen_response(self):
+        if not self.current_conversation_id:
+            self.create_new_conversation()
+
         res = api.get_chat_response(
             prompt=self.query,
             provider=self.selected_provider,
             model=self.selected_model,
             chat_history=self.chat_history,
         )
-        print(res)
+
         if res:
             self.response = res
+            # Save messages to database
+            db = Database.get_instance()
+            db.add_message(self.current_conversation_id, "user", self.query)
+            db.add_message(self.current_conversation_id, "assistant", self.response)
+
         self.is_gen = False
         self.chat_history.append((self.query, self.response))
         self.query = ""

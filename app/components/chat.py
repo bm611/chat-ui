@@ -1,6 +1,7 @@
 import reflex as rx
 from app.state import State
 from typing import List, Tuple
+from .sidebar import sidebar
 
 component_map = {
     # "h1": lambda text: rx.heading(text, size="5", margin_y="1em"),
@@ -41,44 +42,50 @@ def chat_message(message_pair: Tuple[str, str]) -> rx.Component:
 
 
 def chat_section():
-    return rx.box(
-        rx.vstack(
-            # Chat messages
-            rx.box(
-                rx.vstack(
-                    rx.foreach(State.chat_history, chat_message),
-                    spacing="4",
-                    align_items="stretch",
-                    class_name="w-full max-w-[1000px] mx-auto py-8",
-                    size=4,
-                ),
-                class_name="px-40 mt-24 mb-24 w-full",  # Added margin bottom to prevent overlap with input
-                overflow_y="auto",
-                flex="1",
-            ),
-            # Input box fixed at bottom
-            rx.box(
-                rx.hstack(
-                    rx.input(
-                        placeholder="Ask a Follow up...",
-                        class_name="w-full h-12 md:h-20 px-8 md:px-10 pr-16 rounded-full text-slate-600 text-xl md:text-2xl bg-transparent",
-                        value=State.query,
-                        on_change=State.set_query,
+    return rx.hstack(
+        sidebar(),  # Add the sidebar
+        rx.box(
+            rx.vstack(
+                # Chat messages
+                rx.box(
+                    rx.vstack(
+                        rx.foreach(State.chat_history, chat_message),
+                        spacing="4",
+                        align_items="stretch",
+                        class_name="w-full max-w-[1000px] mx-auto py-8",
+                        size=4,
                     ),
-                    rx.button(
-                        rx.icon("send-horizontal"),
-                        class_name="rounded-full bg-gray-600 hover:bg-black absolute right-8 top-1/2 transform -translate-y-1/2",
-                        size="4",
-                        type="submit",
-                        on_click=[State.handle_generation, State.gen_response],
-                        loading=State.is_gen,
-                        disabled=State.is_gen,
-                    ),
-                    class_name="w-full max-w-[1000px] relative flex items-center",
+                    class_name="px-40 mt-24 mb-24 w-full",  # Added margin bottom to prevent overlap with input
+                    overflow_y="auto",
+                    flex="1",
                 ),
-                class_name="fixed bottom-0 left-1/2 -translate-x-1/2 bg-white p-4 border-t border-gray-200 w-full flex justify-center items-center",
+                # Input box fixed at bottom
+                rx.box(
+                    rx.hstack(
+                        rx.input(
+                            placeholder="Ask a Follow up...",
+                            class_name="w-full h-12 md:h-20 px-8 md:px-10 pr-16 rounded-full text-slate-600 text-xl md:text-2xl bg-transparent",
+                            value=State.query,
+                            on_change=State.set_query,
+                        ),
+                        rx.button(
+                            rx.icon("send-horizontal"),
+                            class_name="rounded-full bg-gray-600 hover:bg-black absolute right-8 top-1/2 transform -translate-y-1/2",
+                            size="4",
+                            type="submit",
+                            on_click=[State.handle_generation, State.gen_response],
+                            loading=State.is_gen,
+                            disabled=State.is_gen,
+                        ),
+                        class_name="w-full max-w-[1000px] relative flex items-center",
+                    ),
+                    class_name="fixed bottom-0 left-1/2 -translate-x-1/2 bg-white p-4 border-t border-gray-200 w-full flex justify-center items-center",
+                ),
+                height="100vh",
+                width="100%",
             ),
-            height="100vh",
-            width="100%",
+            class_name="ml-64 w-full",  # Add margin to accommodate sidebar
         ),
+        width="100%",
+        height="100vh",
     )
