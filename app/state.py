@@ -8,6 +8,7 @@ class State(rx.State):
     query: str = ""
     response: str = ""
     is_gen: bool = False
+    sidebar_visible: bool = False
 
     current_conversation_id: Optional[int] = None
     conversations: List[Tuple[int, str, str]] = []
@@ -133,3 +134,7 @@ class State(rx.State):
         self.chat_history.append((self.query, self.response))
         self.query = ""
         return rx.redirect("/chat")
+
+    def toggle_sidebar(self):
+        """Toggle sidebar visibility"""
+        self.sidebar_visible = not self.sidebar_visible
