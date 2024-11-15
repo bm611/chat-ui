@@ -13,12 +13,13 @@ class State(rx.State):
     conversations: List[Tuple[int, str, str]] = []
 
     # New state variables for provider and model selection
-    selected_provider: str = "cerebras"  # default provider
-    selected_model: str = "llama3.1-8b"  # default model
+    selected_provider: str = "ollama"  # default provider
+
     available_providers: List[str] = api.get_available_providers()
     available_models: List[str] = api.get_available_models(
-        "cerebras"
+        "ollama"
     )  # default provider models
+    selected_model: str = available_models[0]  # default model
 
     chat_history: List[Tuple[str, str]] = []
 
@@ -45,9 +46,10 @@ class State(rx.State):
         self.chat_history = []
         self.is_gen = False
         # Reset provider and model to defaults
-        self.selected_provider = "cerebras"
-        self.selected_model = "llama3.1-8b"
-        self.available_models = api.get_available_models("cerebras")
+        self.selected_provider = "ollama"
+
+        self.available_models = api.get_available_models("ollama")
+        self.selected_model = self.available_models[0]
 
         # Create a new conversation with a default title
         self.current_conversation_id = Database.get_instance().create_conversation(

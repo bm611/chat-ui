@@ -1,14 +1,12 @@
 @font-face {
-    font-family: Lexend;
-    src: url("/fonts/Lexend-VariableFont_wght.ttf") format("truetype");
+    font-family: Krypton;
+    src: url("/fonts/Krypton.ttf") format("truetype");
 }
-
 @font-face {
-    font-family: Doto;
-    src: url("/fonts/doto.ttf") format("truetype");
+    font-family: Argon;
+    src: url("/fonts/Argon.ttf") format("truetype");
 }
-
 @font-face {
-    font-family: SourGummy;
-    src: url("/fonts/SourGummy.ttf") format("truetype");
+    font-family: Neon;
+    src: url("/fonts/Neon.ttf") format("truetype");
 }

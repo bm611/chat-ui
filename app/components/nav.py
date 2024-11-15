@@ -1,10 +1,6 @@
 import reflex as rx
 from app.state import State
 
-doto_style = {
-    "font_family": "Doto, sans-serif",
-}
-
 
 def nav_section():
     return (
@@ -18,7 +14,6 @@ def nav_section():
             rx.text(
                 "Reflexity",
                 class_name="text-6xl font-bold",
-                style={"font_family": "SourGummy"},
             ),
             rx.hstack(
                 rx.link(

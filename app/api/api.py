@@ -48,7 +48,7 @@ PROVIDER_CONFIGS: dict[ModelProvider, ModelConfig] = {
     ModelProvider.OLLAMA: ModelConfig(
         base_url="http://localhost:11434/v1",
         api_key="ollama",  # required but unused
-        available_models=["llama3.1:latest", "llama3.2:1b", "qwen2.5-coder:latest"],
+        available_models=["llama3.2:1b", "llama3.1:latest", "qwen2.5-coder:latest"],
     ),
 }
 

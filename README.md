@@ -11,6 +11,7 @@ A modern chat interface built with Reflex that allows you to interact with vario
 - Clean and intuitive chat interface
 - Support for multiple AI providers
 - Model selection capability
+- Chat History powered by Sqlite
 
 ## Prerequisites
 
@@ -22,7 +23,7 @@ A modern chat interface built with Reflex that allows you to interact with vario
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/chat-ui.git
+git clone https://github.com/bm611/chat-ui.git
 cd chat-ui
 ```
 
@@ -43,6 +44,9 @@ pip install -r requirements.txt
 ```
 
 ## Configuration
+
+> [!IMPORTANT]
+> Before running the application, make sure to have the necessary API keys from the supported providers. You can add other openai compatible proivders in the below mentioned file.
 
 1. Set the following environment variables for your API keys:
 ```bash

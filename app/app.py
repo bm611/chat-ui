@@ -15,6 +15,7 @@ def index() -> rx.Component:
     return rx.box(
         nav.nav_section(),
         hero.hero_section(),
+        on_mount=State.on_mount,
         class_name="w-full mt-4",
     )
 
@@ -24,11 +25,12 @@ def chat_page() -> rx.Component:
     return rx.box(
         nav.nav_section(),
         chat.chat_section(),
+        on_mount=State.on_mount,
     )
 
 
 style = {
-    "font_family": "SourGummy",
+    "font_family": "Argon",
 }
 
 
@@ -36,6 +38,6 @@ app = rx.App(
     style=style,
     stylesheets=["/fonts/font.css"],
     theme=rx.theme(
-        appearance="inherit",
+        appearance="light",
     ),
 )
