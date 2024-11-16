@@ -1,20 +1,42 @@
 import os
+import json
 import openai
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 from enum import Enum
+from pathlib import Path
 
 
-class ModelProvider(Enum):
-    CEREBRAS = "cerebras"
-    OPENAI = "openai"
-    HYPERBOLIC = "hyperbolic"
-    OLLAMA = "ollama"
+def _load_provider_names() -> List[str]:
+    config_path = Path(__file__).parent.parent.parent / "config.json"
+    with open(config_path) as f:
+        config_data = json.load(f)
+    return list(config_data["providers"].keys())
+
+
+class ModelProvider(str, Enum):
+    def __new__(cls):
+        providers = _load_provider_names()
+        values = {provider.upper(): provider for provider in providers}
+        return str.__new__(cls)
+
+    @classmethod
+    def _missing_(cls, value):
+        # Handle case-insensitive lookup
+        for member in cls._member_map_.values():
+            if member.lower() == value.lower():
+                return member
+        return None
+
+    def __str__(self):
+        return self.value
+
+ModelProvider = Enum('ModelProvider', {provider.upper(): provider for provider in _load_provider_names()})
 
 
 class ModelConfig:
     def __init__(self, base_url: str, api_key: str, available_models: List[str]):
         self.base_url = base_url
-        self.api_key = api_key
+        self.api_key = api_key if api_key == "ollama" else os.environ.get(api_key, "")
         self.available_models = available_models
         self._client = None
 
@@ -28,29 +50,24 @@ class ModelConfig:
         return self._client
 
 
+def load_provider_configs() -> Dict[ModelProvider, ModelConfig]:
+    config_path = Path(__file__).parent.parent.parent / "config.json"
+    with open(config_path) as f:
+        config_data = json.load(f)
+
+    configs = {}
+    for provider_name, provider_config in config_data["providers"].items():
+        provider_enum = ModelProvider(provider_name)
+        configs[provider_enum] = ModelConfig(
+            base_url=provider_config["base_url"],
+            api_key=provider_config["api_key"],
+            available_models=provider_config["available_models"],
+        )
+    return configs
+
+
 # Configuration for different providers
-PROVIDER_CONFIGS: dict[ModelProvider, ModelConfig] = {
-    ModelProvider.CEREBRAS: ModelConfig(
-        base_url="https://api.cerebras.ai/v1",
-        api_key=os.environ.get("CEREBRAS_API_KEY", ""),
-        available_models=["llama3.1-8b", "llama3.1-70b"],
-    ),
-    ModelProvider.OPENAI: ModelConfig(
-        base_url="https://api.openai.com/v1",
-        api_key=os.environ.get("OPENAI_API_KEY", ""),
-        available_models=["gpt-4o-mini", "gpt-4o", "gpt-4"],
-    ),
-    ModelProvider.HYPERBOLIC: ModelConfig(
-        base_url="https://api.hyperbolic.xyz/v1/",
-        api_key=os.environ.get("HYPERBOLIC_API_KEY", ""),
-        available_models=["Qwen/Qwen2.5-Coder-32B-Instruct"],
-    ),
-    ModelProvider.OLLAMA: ModelConfig(
-        base_url="http://localhost:11434/v1",
-        api_key="ollama",  # required but unused
-        available_models=["llama3.2:1b", "llama3.1:latest", "qwen2.5-coder:latest"],
-    ),
-}
+PROVIDER_CONFIGS: Dict[ModelProvider, ModelConfig] = load_provider_configs()
 
 
 def get_available_providers():
