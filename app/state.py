@@ -12,6 +12,9 @@ class State(rx.State):
 
     current_conversation_id: Optional[int] = None
     conversations: List[Tuple[int, str, str]] = []
+    displayed_conversations: List[Tuple[int, str, str]] = []
+    page_size: int = 10
+    has_more: bool = False
 
     # New state variables for provider and model selection
     selected_provider: str = "ollama"  # default provider
@@ -58,11 +61,29 @@ class State(rx.State):
         )
         # Refresh the conversations list
         self.conversations = Database.get_instance().get_conversations()
+        self.update_displayed_conversations()
         return rx.redirect("/")
 
     def on_mount(self):
         """Load conversations when the app starts"""
         self.conversations = Database.get_instance().get_conversations()
+        self.update_displayed_conversations()
+
+    def update_displayed_conversations(self):
+        """Update the displayed conversations based on pagination"""
+        total_conversations = len(self.conversations)
+        self.displayed_conversations = self.conversations[-self.page_size:]  # Get last 10 conversations
+        self.has_more = total_conversations > len(self.displayed_conversations)
+
+    def load_more_conversations(self):
+        """Load more conversations"""
+        current_count = len(self.displayed_conversations)
+        total_conversations = len(self.conversations)
+        
+        # Calculate how many more conversations to load
+        start_idx = max(0, total_conversations - (current_count + self.page_size))
+        self.displayed_conversations = self.conversations[start_idx:]
+        self.has_more = start_idx > 0
 
     def create_new_conversation(self):
         """Create a new conversation"""
@@ -71,6 +92,7 @@ class State(rx.State):
             title
         )
         self.conversations = Database.get_instance().get_conversations()
+        self.update_displayed_conversations()
 
     def load_conversation(self, conversation_id: int):
         """Load a specific conversation"""
@@ -96,6 +118,7 @@ class State(rx.State):
         db = Database.get_instance()
         db.delete_conversation(conversation_id)
         self.conversations = db.get_conversations()  # Refresh the list
+        self.update_displayed_conversations()
 
         # If the deleted conversation was the current one, reset the state
         if conversation_id == self.current_conversation_id:
@@ -125,6 +148,7 @@ class State(rx.State):
                 self.conversations = (
                     db.get_conversations()
                 )  # Refresh conversations list
+                self.update_displayed_conversations()
 
             # Save messages to database
             db.add_message(self.current_conversation_id, "user", self.query)

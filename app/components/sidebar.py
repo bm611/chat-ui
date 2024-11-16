@@ -10,7 +10,7 @@ def sidebar():
                 rx.divider(),
                 rx.vstack(
                     rx.foreach(
-                        State.conversations,
+                        State.displayed_conversations,
                         lambda conv: rx.hstack(
                             rx.box(
                                 rx.button(
@@ -35,6 +35,14 @@ def sidebar():
                             ),
                             width="100%",
                             overflow="hidden",
+                        ),
+                    ),
+                    rx.cond(
+                        State.has_more,
+                        rx.button(
+                            "Load More",
+                            on_click=State.load_more_conversations,
+                            class_name="mt-4 w-full p-2 bg-gray-100 hover:bg-gray-200 rounded text-gray-700",
                         ),
                     ),
                     class_name="w-full",
