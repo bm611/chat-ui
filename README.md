@@ -9,8 +9,7 @@ A modern chat interface built with Reflex that allows you to interact with vario
 ## Features
 
 - Clean and intuitive chat interface
-- Support for multiple AI providers
-- Model selection capability
+- Support for multiple LLM providers (easily extensible)
 - Chat History powered by Sqlite
 
 ## Prerequisites
@@ -46,7 +45,36 @@ pip install -r requirements.txt
 ## Configuration
 
 > [!IMPORTANT]
-> Before running the application, make sure to have the necessary API keys from the supported providers. You can add other openai compatible proivders in the below mentioned file.
+> Before running the application, make sure to have the necessary API keys from the supported providers.
+
+### Provider Configuration
+
+The application uses `config.json` in the root directory to manage AI providers. To add or modify providers:
+
+1. Open `config.json` and add your provider configuration:
+```json
+{
+    "providers": {
+        "your_provider_name": {
+            "base_url": "https://api.your-provider.com/v1",
+            "api_key": "YOUR_PROVIDER_API_KEY",
+            "available_models": [
+                "model-name-1",
+                "model-name-2"
+            ]
+        }
+    }
+}
+```
+
+Required fields:
+- `base_url`: The provider's API endpoint
+- `api_key`: Environment variable name for the API key (except for local providers like Ollama)
+- `available_models`: List of available models
+
+The application will automatically detect and load any providers defined in this file.
+
+### API Keys Setup
 
 1. Set the following environment variables for your API keys:
 ```bash
