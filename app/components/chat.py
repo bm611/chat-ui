@@ -4,11 +4,6 @@ from typing import List, Tuple
 from .sidebar import sidebar
 
 component_map = {
-    # "h1": lambda text: rx.heading(text, size="5", margin_y="1em"),
-    # "h2": lambda text: rx.heading(text, size="3", margin_y="1em"),
-    # "h3": lambda text: rx.heading(text, size="2", margin_y="1em"),
-    # "p": lambda text: rx.text(text, margin_y="1em", font_family="Inter"),
-    # "code": lambda text: rx.code(text, color="purple"),
     "codeblock": lambda text, **props: rx.code_block(
         text,
         **props,

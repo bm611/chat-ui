@@ -104,15 +104,15 @@ def hero_section():
                         rx.box(
                             rx.text_area(
                                 placeholder="Enter your prompt...",
-                                class_name="w-full px-4 py-2 text-sm md:text-base lg:text-xl rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none pr-[100px]",
+                                class_name="w-full px-4 py-2 text-lg md:text-base rounded-xl border-2 border-black resize-none pr-[80px]",
                                 height="100px",
                                 value=State.query,
                                 on_change=State.set_query,
                             ),
                             rx.button(
                                 rx.icon("send-horizontal"),
-                                class_name="rounded-xl bg-gray-600 hover:bg-black absolute bottom-4 right-2 md:bottom-4 md:right-4",
-                                size="3",
+                                class_name="rounded-xl bg-black hover:bg-gray-600 absolute bottom-3 right-3",
+                                size="2",
                                 type="submit",
                                 on_click=[State.handle_generation, State.gen_response],
                                 loading=State.is_gen,
@@ -126,8 +126,8 @@ def hero_section():
                     ),
                     class_name=rx.cond(
                         State.sidebar_visible,
-                        "w-full max-w-[600px] md:max-w-[800px] mx-auto p-4 transition-all duration-300",
-                        "w-full max-w-[800px] md:max-w-[1000px] mx-auto p-4 transition-all duration-300",
+                        "w-full max-w-[500px] md:max-w-[700px] mx-auto p-4 transition-all duration-300",
+                        "w-full max-w-[700px] md:max-w-[900px] mx-auto p-4 transition-all duration-300",
                     ),
                 ),
                 rx.hstack(
