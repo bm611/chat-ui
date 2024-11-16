@@ -127,7 +127,7 @@ def hero_section():
                     class_name=rx.cond(
                         State.sidebar_visible,
                         "w-full max-w-[600px] md:max-w-[800px] mx-auto p-4 transition-all duration-300",
-                        "w-full max-w-[800px] md:max-w-[1000px] mx-auto p-4 transition-all duration-300"
+                        "w-full max-w-[800px] md:max-w-[1000px] mx-auto p-4 transition-all duration-300",
                     ),
                 ),
                 rx.hstack(
@@ -151,6 +151,14 @@ def hero_section():
                             placeholder="Select Model",
                             value=State.selected_model,
                             on_change=State.set_model,
+                            class_name="text-lg",
+                        ),
+                        justify="center",
+                        align="center",
+                    ),
+                    rx.hstack(
+                        rx.text("Web Search:", class_name="text-xl"),
+                        rx.switch(
                             class_name="text-lg",
                         ),
                         justify="center",

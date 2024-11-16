@@ -10,3 +10,7 @@
     font-family: Neon;
     src: url("/fonts/Neon.ttf") format("truetype");
 }
+@font-face {
+    font-family: Lexend;
+    src: url("/fonts/Lexend.ttf") format("truetype");
+}

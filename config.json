@@ -32,6 +32,24 @@
                 "llama3.1:latest",
                 "qwen2.5-coder:latest"
             ]
+        },
+        "groq": {
+            "base_url": "https://api.groq.com/openai/v1",
+            "api_key": "GROQ_API_KEY",
+            "available_models": [
+                "gemma2-9b-it",
+                "llama-3.2-90b-vision-preview"
+            ]
+        },
+        "gemini": {
+            "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
+            "api_key": "GEMINI_API_KEY",
+            "available_models": [
+                "gemini-1.5-flash",
+                "gemini-1.5-pro",
+                "gemini-1.5-flash-8b",
+                "gemini-exp-1114"
+            ]
         }
     }
 }

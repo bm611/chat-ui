@@ -30,7 +30,7 @@ def chat_page() -> rx.Component:
 
 
 style = {
-    "font_family": "Argon",
+    "font_family": "Lexend",
 }
 
 
