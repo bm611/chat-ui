@@ -12,9 +12,6 @@ component_map = {
         border_radius="16px",
         font_family="Inter",
     ),
-    "a": lambda text, **props: rx.link(
-        text, **props, color="blue", _hover={"color": "black"}, font_family="Inter"
-    ),
 }
 
 
@@ -80,7 +77,7 @@ def chat_section():
             class_name=rx.cond(
                 State.sidebar_visible,
                 "ml-0 md:ml-80 w-full transition-all duration-300",
-                "ml-0 w-full transition-all duration-300"
+                "ml-0 w-full transition-all duration-300",
             ),
         ),
         width="100%",
